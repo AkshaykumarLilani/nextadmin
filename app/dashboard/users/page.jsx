@@ -1,17 +1,26 @@
-import styles from "@/app/ui/dashboard/users/users.module.css";
-import Search from "@/app/ui/dashboard/search/search";
+import styles from "../../ui/dashboard/users/users.module.css";
+import Search from "../../ui/dashboard/search/search";
 import Link from "next/link";
 import Image from "next/image";
-import Pagination from "@/app/ui/dashboard/pagination/pagination";
+import Pagination from "../../ui/dashboard/pagination/pagination";
+import { ITEMS_PER_PAGE, fetchUsers } from "../../lib/data";
 
-const users = [];
+async function UsersPage({ searchParams }) {
 
-function UsersPage() {
-  const deleteUser = () => {}
+  const q = searchParams?.q || "";
+  const page = searchParams?.page || 1;
+
+  const {count, users} = await fetchUsers(q, page);
+
+  const deleteUser = () => { }
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a user..." />
+        <div>
+        Showing {ITEMS_PER_PAGE*(page-1)+1}-{ITEMS_PER_PAGE*(page) < count ? ITEMS_PER_PAGE*(page) : count} / {count}
+        </div>
         <Link href="/dashboard/users/add">
           <button className={styles.addButton}>Add New</button>
         </Link>
@@ -65,7 +74,7 @@ function UsersPage() {
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={count}/>
     </div>
   )
 }

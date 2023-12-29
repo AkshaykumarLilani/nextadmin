@@ -1,20 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "@/app/ui/dashboard/products/products.module.css";
-import Search from "@/app/ui/dashboard/search/search";
-import Pagination from "@/app/ui/dashboard/pagination/pagination";
+import styles from "../../ui/dashboard/products/products.module.css";
+import Search from "../../ui/dashboard/search/search";
+import Pagination from "../../ui/dashboard/pagination/pagination";
+import { ITEMS_PER_PAGE, fetchProducts } from "../../lib/data";
 
 const ProductsPage = async ({ searchParams }) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
-  const products = [];
-  const count = 0;
-  const deleteProduct = () => {}
+  const {count, products} = await fetchProducts(q, page);
+  const deleteProduct = () => { }
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a product..." />
+        <div>
+          Showing {ITEMS_PER_PAGE*(page-1)+1}-{ITEMS_PER_PAGE*(page) < count ? ITEMS_PER_PAGE*(page) : count} / {count}
+        </div>
         <Link href="/dashboard/products/add">
           <button className={styles.addButton}>Add New</button>
         </Link>

@@ -1,4 +1,4 @@
-import styles from "@/app/ui/login/login.module.css";
+import styles from "../ui/login/login.module.css";
 import LoginForm from "../ui/login/loginForm/loginForm";
 
 const LoginPage = () => {

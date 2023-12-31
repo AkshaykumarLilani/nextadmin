@@ -4,12 +4,12 @@ import styles from "../../ui/dashboard/products/products.module.css";
 import Search from "../../ui/dashboard/search/search";
 import Pagination from "../../ui/dashboard/pagination/pagination";
 import { ITEMS_PER_PAGE, fetchProducts } from "../../lib/data";
+import { deleteProduct } from "../../lib/actions";
 
 const ProductsPage = async ({ searchParams }) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
   const {count, products} = await fetchProducts(q, page);
-  const deleteProduct = () => { }
 
   return (
     <div className={styles.container}>
@@ -59,7 +59,7 @@ const ProductsPage = async ({ searchParams }) => {
                       View
                     </button>
                   </Link>
-                  <form>
+                  <form action={deleteProduct}>
                     <input type="hidden" name="id" value={product.id} />
                     <button className={`${styles.button} ${styles.delete}`}>
                       Delete

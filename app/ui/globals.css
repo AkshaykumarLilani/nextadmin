@@ -20,3 +20,39 @@ a{
     text-decoration: none;
     color: inherit;
 }
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  height: 100svh;
+  width: 100wvw;
+  gap: 20px;
+}
+
+.login-button-container > a{
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.login-button-container > a:hover{
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.demo-account{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: gray;
+}
+
+.demo-account td {
+  padding: 5px;
+}
